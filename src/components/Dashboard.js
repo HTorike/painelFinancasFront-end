@@ -8,12 +8,12 @@ function Dashboard() {
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
-                const respoonse = await fetch("https://painelfinancasback-end.onrender.com");
-                if (!respoonse.ok) {
+                const response = await fetch("https://painelfinancasback-end.onrender.com/transactions/dashboard");
+                if (!response.ok) {
                     throw new Error("Erro na rede ou no servidor");
                 }
 
-                const result = await respoonse.json();
+                const result = await response.json();
                 setData (result);
             } catch (err) {
                 setError(err.message);
