@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { TextField, Button, Box, Typography, Grid } from '@mui/material';
 
 function TransactionForm({ onTransactionAdded }) {
     const [description, setDescription] = useState("");
@@ -43,37 +44,68 @@ function TransactionForm({ onTransactionAdded }) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Descrição"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <input
-            type="number"
-            placeholder="Valor"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          />
-          <div>
-            <button
-              type="button"
-              onClick={() => setType('income')}
-              style={{ backgroundColor: type === 'income' ? 'green' : 'gray' }}
-            >
-              Entrada
-            </button>
-            <button
-              type="button"
-              onClick={() => setType('expense')}
-              style={{ backgroundColor: type === 'expense' ? 'red' : 'gray' }}
-            >
-              Saída
-            </button>
-          </div>
-          <button type="submit">Adicionar Transação</button>
-        </form>
+        <Box component={"form"} onSubmit={handleSubmit} sx={{ mt: 2, mb: 4, p: 2, border: '1px solid #ccc', borderRadius: 2 }}>
+
+            <Typography variant="h6" gutterBottom justifyContent={"center"} align="center">
+              Adicionar Nova Transação
+            </Typography>
+
+            <Grid container spacing={2} justifyContent={"center"} alignItems="center">
+
+                <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Descrição"
+                      variant="outlined"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                    />
+                </Grid>
+
+                <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Valor"
+                      variant="outlined"
+                      type="number"
+                      value={amount}
+                      onChange={(e) => setAmount(e.target.value)}
+                    />
+                </Grid>
+              
+                <Grid container spacing={0}>
+                  <Box sx={{ display: 'flex', gap: 2 }}>
+
+                    <Button
+                      variant={type === "income" ? "contained" : "outlined"}
+                      onClick={() => setType("income")}
+                      color="success">
+                      Entrada
+                    </Button>
+                    <Button
+                      variant={type === "expense" ? "contained" : "outlined"}
+                      onClick={() => setType("expense")}
+                      color="error">
+                      Saída
+                    </Button>
+
+                  </Box>
+                </Grid>
+
+                <Grid item xs={12}>
+
+                    <Button 
+                    fullWidth
+                    type="submit"
+                    variant="contained">
+                      Adicionar Transação
+                    </Button>
+                  
+                </Grid>
+
+            </Grid>
+
+        </Box>
     );
 }
 
